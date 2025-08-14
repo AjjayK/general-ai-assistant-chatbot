@@ -23,9 +23,16 @@ from typing import List, Dict, Any
 import os
 from dotenv import load_dotenv
 
+# Load .env file if it exists (optional)
 load_dotenv()
-openai_key = os.environ.get("OPENAI_API_KEY")
-tavily_api_key = os.environ.get("tavily_api_key")
+
+# Get API keys dynamically from environment
+def get_openai_key():
+    """Get OpenAI API key from environment."""
+    key = os.environ.get("OPENAI_API_KEY")
+    if not key:
+        raise ValueError("OpenAI API key not found. Please set it in the Streamlit interface or .env file.")
+    return key
 
 
 
@@ -67,6 +74,10 @@ def get_youtube_trancript(video_url: str) -> str:
 @tool
 def web_search(query: str) -> str:
     """Search Tavily for a query and return at most 3 results."""
+    tavily_key = os.environ.get("tavily_api_key")
+    if not tavily_key:
+        return "Web search unavailable. Please set your Tavily API key in the Streamlit interface or .env file."
+    
     tavily = TavilySearchResults(
         max_results=3,
         include_answer=True,       # optional; see docs
@@ -114,7 +125,7 @@ def image_input_response(query: str, image_path: str) -> str:
         str: The response from the OpenAI API.
     """
     client = OpenAI( 
-        api_key=openai_key
+        api_key=get_openai_key()
     )
 
     try:
@@ -168,7 +179,7 @@ def file_input_response(query: str, file_path: str) -> str:
         str: The response from the OpenAI API.
     """
     client = OpenAI( 
-        api_key=openai_key
+        api_key=get_openai_key()
     )
 
     try:
@@ -206,7 +217,7 @@ def transcribe_audio(file_path: str) -> str:
     Returns:
         str: Transcription of the audio.
     """
-    client = OpenAI(api_key=openai_key)
+    client = OpenAI(api_key=get_openai_key())
     file = open(file_path, "rb")
 
     try:
@@ -290,7 +301,7 @@ def download_question_file(url: str, save_dir: str = ".") -> str:
 def build_agent():
     llm = ChatOpenAI(
     model="gpt-4.1",
-    api_key = openai_key)
+    api_key=get_openai_key())
 
     tools=[
         web_search,

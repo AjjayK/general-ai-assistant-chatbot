@@ -21,9 +21,16 @@ A powerful AI chatbot built with LangGraph and Streamlit that can search the web
 pip install -r requirements.txt
 ```
 
-### 2. Environment Variables
+### 2. API Keys Setup
 
-Create a `.env` file in the root directory with your API keys:
+You have two options for providing API keys:
+
+#### Option 1: Streamlit Interface (Recommended)
+- Enter your API keys directly in the Streamlit sidebar when you run the app
+- More secure as keys are not stored in files
+
+#### Option 2: Environment File (Optional)
+Create a `.env` file in the root directory:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
@@ -31,8 +38,8 @@ tavily_api_key=your_tavily_api_key_here
 ```
 
 **Required API Keys:**
-- **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys)
-- **Tavily API Key**: Get from [Tavily](https://tavily.com/) (optional, for web search)
+- **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys) - Required
+- **Tavily API Key**: Get from [Tavily](https://tavily.com/) - Optional, for web search
 
 ### 3. Run the Streamlit App
 
@@ -46,8 +53,8 @@ The app will open in your browser at `http://localhost:8501`
 
 ### 1. Initialize the Agent
 1. Open the Streamlit app
-2. Enter your API keys in the sidebar
-3. Click "🚀 Initialize Agent"
+2. Enter your API keys in the sidebar (or use .env file)
+3. Click "Initialize Agent"
 
 ### 2. Start Chatting
 - Type your questions in the chat area
@@ -90,7 +97,7 @@ GAIA-Chatbot/
 ├── agent.py          # Main agent implementation
 ├── app.py           # Streamlit web interface
 ├── requirements.txt  # Python dependencies
-├── .env             # Environment variables (create this)
+├── .env             # Environment variables (optional)
 ├── .gitignore       # Git ignore file
 └── README.md        # This file
 ```
