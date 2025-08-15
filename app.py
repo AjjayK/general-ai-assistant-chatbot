@@ -56,7 +56,7 @@ def main():
         if api_key:
             os.environ["OPENAI_API_KEY"] = api_key
         if tavily_key:
-            os.environ["tavily_api_key"] = tavily_key
+            os.environ["TAVILY_API_KEY"] = tavily_key
         
         # Initialize agent button
         if st.button("Initialize Agent", type="primary"):

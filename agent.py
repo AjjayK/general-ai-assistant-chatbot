@@ -74,7 +74,7 @@ def get_youtube_trancript(video_url: str) -> str:
 @tool
 def web_search(query: str) -> str:
     """Search Tavily for a query and return at most 3 results."""
-    tavily_key = os.environ.get("tavily_api_key")
+    tavily_key = os.environ.get("TAVILY_API_KEY")
     if not tavily_key:
         return "Web search unavailable. Please set your Tavily API key in the Streamlit interface or .env file."
     
